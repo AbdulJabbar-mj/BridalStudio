@@ -1,0 +1,25 @@
+// Firebase setup — reads config from environment variables (see .env.example).
+// 1. Create a free project at https://console.firebase.google.com
+// 2. Enable: Firestore Database, Storage, and Authentication (Email/Password)
+// 3. Copy your web app config values into a local .env file (never commit it)
+
+import { initializeApp } from 'firebase/app'
+import { getFirestore } from 'firebase/firestore'
+import { getStorage } from 'firebase/storage'
+import { getAuth } from 'firebase/auth'
+
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+}
+
+const app = initializeApp(firebaseConfig)
+
+export const db = getFirestore(app)
+export const storage = getStorage(app)
+export const auth = getAuth(app)
+console.log('Firebase config:', firebaseConfig)
